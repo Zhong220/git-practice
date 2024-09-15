@@ -169,5 +169,53 @@ blob, tree, commit, branch, head構成了Git資料管理和版本控制的基礎
 
         - git checkout new-feature（切換到新分支）：此時.git/HEAD更新並且指向refs/heads/new-feature，表示我目前再次分支上工作。
 
+        - git checkout master（切換回master分支）：在新分支修改完git.md並提交後，切換回master分支並將new-feature分支合併回去。
+
+## git merge
+
+        - git merge new-feature(將new-feature合併回master)：這會創建一個新的合併提交，並更新.git/refs/heads/master，使其指向新的合併提交。
+
+        最後檢查.git變化：
+
+            －.git/objects/：會生成一個新的合併commit物件，這個commit物件有兩個父提交，分別來自master和 new-feature。
+
+            －.git/refs/heads/master：更新，指向新的合併提交。
+
+            - .git/HEAD：仍然指向 refs/heads/master，因為已切換回master分支。
 
 # commit message 應該怎麼寫比較好？應該有什麼 style 嗎？
+
+## commit Message 格式
+
+    *Header格式:*
+
+        - 格式：<TYPE>(<SCOPE>): <SUBJECT>
+        - TYPE：表示commit的類型，例如：
+            - feat：新增或修改功能
+            - fix：修復bug
+            - docs：文件更新
+            - style：格式變更（例如空格、分號）
+            - refactor：重構（無功能變更）    
+            - test：增加測試
+            - chore：建構工具或輔助程式變更
+            - perf：效能優化
+            - revert：回復先前的commit
+        - SCOPE：影響範圍，例如資料庫、模板（可選）
+        - SUBJECT：簡短描述（不超過 50 字元，且不用句號結尾）
+
+    *Body詳細說明:*
+
+        - 詳細描述本次commit的內容、原因及改動
+        - 每行不超過 72 字元
+        - 說明「做了什麼」、「為什麼要做這件事」以及「如何實現」
+
+    *Footer(可選):*
+
+        - 若與issue或pull request相關，記錄編號，如(Issue: #1234)
+        - 若有重大變更或不相容更新，使用 BREAKING CHANGE:，並詳細描述變更的內容和遷移方式。
+
+## commit message style
+
+    - 動詞開頭：標題用動詞開頭，簡潔有力，使用現在式，如：Add, Fix, Update。 
+    - 保持簡潔：每次 commit 應只針對一個功能或修正，避免一次提交太多變更。
+    - 一致性：團隊應保持 commit message 格式一致，便於日後查閱。
