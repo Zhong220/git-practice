@@ -104,6 +104,8 @@ blob, tree, commit, branch, head構成了Git資料管理和版本控制的基礎
 
 # 紀錄在 git repo 操作過程中，.git 檔案夾裡的變化，看看你可以觀察到什麼。
 
+## git init
+
     我在C:\Users\容\OneDrive\桌面\Cloud_native\personal_hw\W01_HWA這個路徑上執行git init，此時Git創建了一個.git資料夾來存放與版本控制相關的數據。
 
     初始化後的.git資料夾產生了下列結構，接著我去了解他們分別存放那些資料，有何作用：
@@ -135,6 +137,37 @@ blob, tree, commit, branch, head構成了Git資料管理和版本控制的基礎
         - HEAD：
             HEAD文件是Git用來指向當前分支的指針，表示當前檢出的分支或具體的commit。通常會指向refs/heads/<branch>，表示正在該分支上工作。而我的文件內容是ref: refs/heads/master，代表我對文件的所有變更、提交都會影響master分支。
 
-    當我編輯或創建文件，例如git.md、readme.md、vedio.md後，執行git add命令，Git便將這些文件內容儲存為blob物件，並將其添加到暫存區。
+## git add
+
+    當我編輯或創建文件，例如git.md、readme.md、vedio.md後，執行git add命令，Git便將這些文件內容儲存為blob物件，並將其添加到暫存區。在這個時候我進入object資料夾時，沒有看到以hash value命名的blob文件，而後才發現，它悶被分成兩部分存在資料夾當中，所以只出現一些簡短的資料夾名(如36、48、a5)，而非完整的。
+
+    而後才知道，假設git.md的hash value是a5b9c9f8...，那麼它的blob物件會儲存在.git/objects/a5/b9c9f8...這個路徑中，其中：
+        
+        －a5 是哈希值的前兩個字符，作為子目錄的名稱。
+
+        －b9c9f8... 是剩餘的哈希值部分，作為文件名。
+
+## git commit
+
+    git.md、readme.md、vedio.md都在暫存區後，接下來透過git commit來記錄這些變更。提交後，得到5d6c4f2作為本次提交的hash value，再度進到object資料夾中可以發現提交後這些新生成的commit物件被儲存在這個資料夾裡，且hash value便是5d6c4f2。而透過cat .git/refs/heads/master可以查看現在master分支指項的提交:5d6c4f2d1dacc5bcf64dd4232e9897cf38afe1f6。
+
+    接著我對git.md進行修改後重新執行git add git.md指令，會發現object資料夾中生成了新的blob物件，接著使用git commit -m "Update git.md"去創建新的commit和tree物件，同時更新.git/refs/heads/master以指向新的提交，.git變化如下:
+        
+        - .git/objects/：這裡將會生成新的 blob、tree 和 commit 物件。你可以檢查 .git/objects/ 中是否新增了新的物件。
+
+        -git/refs/heads/master：這個文件會更新，指向最新的提交。
+        
+        -git/HEAD：HEAD文件仍然指向master分支。
+
+## git branch
+
+    接著練習創建新分支並切換到該分支，去觀察.git/refs/heads/中的變化：
+
+        －git branch new-feature（創建新分支）：此時在.git/refs/heads/中創建一個新的文件new-feature，指向當前master分支的提交。
+
+## git checkout
+
+        - git checkout new-feature（切換到新分支）：此時.git/HEAD更新並且指向refs/heads/new-feature，表示我目前再次分支上工作。
+
 
 # commit message 應該怎麼寫比較好？應該有什麼 style 嗎？
