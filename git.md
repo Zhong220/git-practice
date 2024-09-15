@@ -108,7 +108,7 @@
 
 ### git add
 
-當我創建文件如 `git.md`、`readme.md`、`vedio.md` 並執行 `git add`，Git 會將這些文件轉換為 `blob` 物件並添加到暫存區。此時 `.git/objects/` 生成了新的 `blob`，以 `hash value` 來命名文件。
+當我創建文件如 `git.md`、`readme.md`、`video.md` 並執行 `git add`，Git 會將這些文件轉換為 `blob` 物件並添加到暫存區。此時 `.git/objects/` 生成了新的 `blob`，以 `hash value` 來命名文件。
 
 ### git commit
 
