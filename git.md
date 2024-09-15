@@ -1,8 +1,8 @@
-# 說明 blob, tree, commit, branch, head 分別是什麼?
+## 說明 blob, tree, commit, branch, head 分別是什麼?
 
 `blob`, `tree`, `commit`, `branch`, `head` 構成了 Git 資料管理和版本控制的基礎，以下為各個概念的說明：
 
-## 1. blob (Binary Large Object)：文件內容的儲存單位
+### 1. blob (Binary Large Object)：文件內容的儲存單位
 
 **blob 是甚麼?**
 
@@ -19,7 +19,7 @@
 - 執行 `git add` 時，Git 會將文件內容轉換成 `blob` 並保存到 Git 的 Object Database 中。
 - 執行 `git commit` 時，Git 只會引用已存在的 `blob`，節省儲存空間。
 
-## 2. tree：文件目錄的表示方式
+### 2. tree：文件目錄的表示方式
 
 **tree 是甚麼?**
 
@@ -35,7 +35,7 @@
 - 執行 `git commit` 時，Git 會生成一個 `tree` 來表示當前目錄結構，記錄每個文件的名稱、權限以及對應的 `blob`。
 - 若目錄下有子目錄，`tree` 會包含指向子目錄的 `tree`，形成層級結構。
 
-## 3. commit：版本控制的核心單位
+### 3. commit：版本控制的核心單位
 
 **commit 是甚麼?**
 
@@ -55,7 +55,7 @@
 
 - 執行 `git commit` 時，Git 會生成一個新的 `commit` 物件，指向當前的 `tree`，並記錄提交訊息和信息。
 
-## 4. branch：分支，指不同版本的開發線
+### 4. branch：分支，指不同版本的開發線
 
 **branch 是甚麼?**
 
@@ -72,7 +72,7 @@
 - 提交後，該 `branch` 自動更新指向最新的 `commit`。
 - 可以透過 `merge` 合併不同 `branch`。
 
-## 5. HEAD：當前檢出的指針
+### 5. HEAD：當前檢出的指針
 
 **HEAD 是甚麼?**
 
@@ -88,13 +88,13 @@
 - 當切換分支時，`HEAD` 會指向新分支的最新提交。
 - 執行 `git checkout <commit>` 時，`HEAD` 進入脫離狀態，指向該 `commit`。
 
-# 紀錄在 git repo 操作過程中，`.git` 資料夾裡的變化，看看你可以觀察到什麼。
+## 紀錄在 git repo 操作過程中，`.git` 資料夾裡的變化，看看你可以觀察到什麼。
 
-## git init
+### git init
 
 我在 `C:\Users\容\OneDrive\桌面\Cloud_native\personal_hw\W01_HWA` 執行 `git init`，此時 Git 創建了一個 `.git` 資料夾來存放版本控制的數據。
 
-### 初始化後 `.git` 資料夾的結構
+#### 初始化後 `.git` 資料夾的結構
 
 - **hooks：** 存放 hook scripts，用來在特定 Git 操作前後自動執行操作。
 - **info：** 包含 `exclude` 文件，類似 `.gitignore`，但針對整個儲存庫全局生效。
@@ -106,29 +106,29 @@
 - **description：** 用於 bare repository 提供簡單描述，在普通儲存庫中無用。
 - **HEAD：** 指向當前 `branch` 或具體的 `commit`。
 
-## git add
+### git add
 
 當我創建文件如 `git.md`、`readme.md`、`vedio.md` 並執行 `git add`，Git 會將這些文件轉換為 `blob` 物件並添加到暫存區。此時 `.git/objects/` 生成了新的 `blob`，以 `hash value` 來命名文件。
 
-## git commit
+### git commit
 
 提交後生成 `commit` 物件，`objects` 資料夾裡會存放新生成的 `commit`、`tree` 和 `blob` 物件，`refs/heads/master` 更新指向最新的 `commit`。
 
-## git branch
+### git branch
 
 當我創建新分支時（如 `git branch new-feature`），`.git/refs/heads/` 中創建一個名為 `new-feature` 的文件，指向當前的 `commit`。
 
-## git checkout
+### git checkout
 
 執行 `git checkout <branch>` 切換分支，`HEAD` 更新指向新的分支。
 
-## git merge
+### git merge
 
 執行 `git merge new-feature`，生成合併 `commit`，更新 `.git/refs/heads/master` 指向合併提交。
 
-# commit message 應該怎麼寫比較好？應該有什麼 style 嗎？
+## commit message 應該怎麼寫比較好？應該有什麼 style 嗎？
 
-## commit Message 格式
+### commit Message 格式
 
 - **Header 格式：** `<TYPE>(<SCOPE>): <SUBJECT>`
   - **TYPE:** 表示 commit 的類型：
@@ -152,7 +152,7 @@
   - 若與 issue 或 pull request 相關，記錄編號，如 `Issue: #1234`。
   - 若有重大變更或不相容更新，使用 `BREAKING CHANGE: ` 說明變更內容和遷移方式。
 
-## commit message style
+### commit message style
 
 - **動詞開頭：** 標題用動詞開頭，簡潔有力，使用現在式。
 - **保持簡潔：** 每次 commit 針對單一功能或修正，避免提交太多變更。
