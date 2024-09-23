@@ -14,7 +14,7 @@
 
 `測試結果vs現實需求：`
 
-![測試結果](https://drive.google.com/file/d/1K5W9cwNGqk_Bm6Y9r9TWhLeWvWupYZon/view)
+![測試結果]("C:\Users\容\OneDrive\桌面\test.png")
 - Node.js：JS的 V8 引擎對簡單迴圈做了優化，因此`sum1`大約花費 482 ms，而`sum2`同樣也很快。
 
 - C 語言：`sum1`花費了約 1796 ms，`sum2`幾乎瞬間完成。我認為這符合 C 的低層性能表現，能顯著提高迴圈處理的效能。
@@ -55,7 +55,7 @@
 
 ## TODO 2：
 #### 換成小一點的數字，結果如何？
-![測試結果(小)](test_small.png)
+![測試結果(小)]("C:\Users\容\OneDrive\桌面\test_small.png")
 
 - **迴圈內的執行時間變短**：因為計算的數值變小，執行時間自然縮短，這在`sum1`中相較明顯，因為它是逐步累加的迴圈。
 
