@@ -14,7 +14,7 @@
 
 `測試結果vs現實需求：`
 
-![測試結果](test.png)
+![測試結果](https://drive.google.com/file/d/1K5W9cwNGqk_Bm6Y9r9TWhLeWvWupYZon/view)
 - Node.js：JS的 V8 引擎對簡單迴圈做了優化，因此`sum1`大約花費 482 ms，而`sum2`同樣也很快。
 
 - C 語言：`sum1`花費了約 1796 ms，`sum2`幾乎瞬間完成。我認為這符合 C 的低層性能表現，能顯著提高迴圈處理的效能。
