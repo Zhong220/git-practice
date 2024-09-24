@@ -14,7 +14,7 @@ blob, tree, commit, branch, head構成了Git資料管理和版本控制的基礎
                 
 - **Hash value標示：** Git通過SHA-1算法計算文件內容的Hash value，作為blob的唯一標識，並且若兩個文件內容完全一樣，Git會產生相同的Hash value，使得在儲存時避免保存相同的資料。
                 
-- **壓縮：** 為了節省空間，Git會將blob進行壓縮，並且blob是以不可變的形式儲存的，依但被創建就不會被修改。
+- **壓縮：** 為了節省空間，Git會將blob進行壓縮，並且blob是以不可變的形式儲存的，一但被建立就不會被修改。
 
 #### blob的操作？
 
@@ -45,7 +45,7 @@ tree是Git中用來表示目錄結構的資料結構。包含了目錄下的文�
             
 #### commit是甚麼？
 
-commit是Git中最關鍵的資料結構，記錄了當前提交的具體內容以及該次提交的所有元資料，例如提交信息、作者信息、時間等等。每次提交Git就會創建一個新的commit物件。
+commit是Git中最關鍵的資料結構，記錄了當前提交的具體內容以及該次提交的所有元資料，例如提交信息、作者信息、時間等等。每次提交Git就會建立一個新的commit物件。
 
 #### commit的結構？
 
@@ -71,13 +71,13 @@ branch是一個可變的指針，它指向某個特定的commit，用來表示�
 
 #### brach的結構？
 
-- **指向commit：** 一個branch本質上就是一個指向某個commit的名稱，當創建新的branch時會指向當前head所指向的commit。
+- **指向commit：** 一個branch本質上就是一個指向某個commit的名稱，當建立新的branch時會指向當前head所指向的commit。
 
 - **隨提交移動：** 當在某個分支上提交新的程式代碼時，branch的指針會自動移到最新的commit。
 
 #### branch的操作？
 
-- 當執行git checkout -b 新branch時，Git會創建一個新的branch，並且最初會指向當前的cmmit。
+- 當執行git checkout -b 新branch時，Git會建立一個新的branch，並且最初會指向當前的cmmit。
         
 - 當在該branch上commit後，該branch會自動更新去指項新的commit。
 
@@ -106,7 +106,7 @@ head是特殊的指針，指向當前檢出的commit或branch。它告訴Git你�
 
 #### git init
 
-我在C:\Users\容\OneDrive\桌面\Cloud_native\personal_hw\W01_HWA這個路徑上執行`git init`，此時Git創建了一個.git資料夾來存放與版本控制相關的資訊。
+我在C:\Users\容\OneDrive\桌面\Cloud_native\personal_hw\W01_HWA這個路徑上執行`git init`，此時Git建立了一個.git資料夾來存放與版本控制相關的資訊。
 
 初始化後的.git資料夾產生了下列結構，接著我去了解他們分別存放那些資料，有何作用：
 
@@ -139,7 +139,7 @@ head是特殊的指針，指向當前檢出的commit或branch。它告訴Git你�
 
 ### git add
 
-當我編輯或創建文件，例如`git.md`、`readme.md`、`video.md`後，執行`git add`命令，Git便將這些文件內容儲存為`blob`物件，並將其添加到暫存區。在這個時候我進入object資料夾時，沒有看到以 *hash value* 命名的`blob`文件，而後才發現，它悶被分成兩部分存在資料夾當中，所以只出現一些簡短的資料夾名(如36、48、a5)，而非完整的。
+當我編輯或建立文件，例如`git.md`、`readme.md`、`video.md`後，執行`git add`命令，Git便將這些文件內容儲存為`blob`物件，並將其添加到暫存區。在這個時候我進入object資料夾時，沒有看到以 *hash value* 命名的`blob`文件，而後才發現，它悶被分成兩部分存在資料夾當中，所以只出現一些簡短的資料夾名(如36、48、a5)，而非完整的。
 
 而後才知道，假設`git.md`的 *hash value* 是a5b9c9f8...，那麼它的blob物件會儲存在.git/objects/a5/b9c9f8...這個路徑中，其中：
         
@@ -150,7 +150,7 @@ head是特殊的指針，指向當前檢出的commit或branch。它告訴Git你�
 
 `git.md`、`readme.md`、`vedio.md`都在暫存區後，接下來透過`git commit`來記錄這些變更。提交後，得到5d6c4f2作為本次提交的 *hash value*，再度進到`object`資料夾中可以發現提交後這些新生成的`commit`物件被儲存在這個資料夾裡，且 *hash value* 便是5d6c4f2。而透過`cat .git/refs/heads/master`可以查看現在master分支指項的提交:5d6c4f2d1dacc5bcf64dd4232e9897cf38afe1f6。
 
-接著我對`git.md`進行修改後重新執行`git add git.md`指令，會發現`object`資料夾中生成了新的`blob`物件，接著使用`git commit -m "Update git.md"`去創建新的`commit`和`tree`物件，同時更新`.git/refs/heads/master`以指向新的提交，`.git`變化如下:
+接著我對`git.md`進行修改後重新執行`git add git.md`指令，會發現`object`資料夾中生成了新的`blob`物件，接著使用`git commit -m "Update git.md"`去產生新的`commit`和`tree`物件，同時更新`.git/refs/heads/master`以指向新的提交，`.git`變化如下:
         
 - **.git/objects/：** 這裡將會生成新的`blob`、`tree`和`commit`物件。你可以檢查`.git/objects/`中是否新增了新的物件。
 
@@ -160,9 +160,9 @@ head是特殊的指針，指向當前檢出的commit或branch。它告訴Git你�
 
 ### git branch
 
-接著練習創建新分支並切換到該分支，去觀察`.git/refs/heads/`中的變化：
+接著練習建立新分支並切換到該分支，去觀察`.git/refs/heads/`中的變化：
 
-- **git branch new-feature（創建新分支）：** 此時在`.git/refs/heads/`中創建一個新的文件`new-feature`，指向當前`master`分支的提交。
+- **git branch new-feature（建立新分支）：** 此時在`.git/refs/heads/`中建立一個新的文件`new-feature`，指向當前`master`分支的提交。
 
 ### git checkout
 
@@ -172,7 +172,7 @@ head是特殊的指針，指向當前檢出的commit或branch。它告訴Git你�
 
 ### git merge
 
-- `git merge new-feature`(將new-feature合併回master)：這會創建一個新的合併提交，並更新`.git/refs/heads/master`，使其指向新的合併提交。
+- `git merge new-feature`(將new-feature合併回master)：這會產生一個新的合併提交，並更新`.git/refs/heads/master`，使其指向新的合併提交。
 
 最後檢查`.git`變化：
 
