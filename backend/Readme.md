@@ -8,7 +8,7 @@
 - [x] 4. package.json 中的 scripts 這個區塊怎麼用
 - [x] 5. Port number 要怎麼以環境變數來設定
 - [x] 6. 哪些檔案應該要被放上 github repo 
-- [ ] 7. CJS vs ESM，這兩者分別怎麼用
+- [x] 7. CJS vs ESM，這兩者分別怎麼用
 ## 1. 觀察 package.json 的變化
 在 /backend 中執行 `npm init` 後，產生 package.json，其內容如下：
 
@@ -51,7 +51,7 @@
   }
 ```
 
-為甚麼？
+**Q：為甚麼？**
 
 原因：
 
@@ -172,3 +172,76 @@ node_modules/
 .env
 ```
 ## 7. CJS vs ESM，這兩者分別怎麼用？
+
+### 辨識模組類型
+- **CommonJS （CJS）** 是 Node.js 的預設模組系統，使用 `require()` 引入模組和 `module.exports` 匯出模組。
+
+- **ECMAScript Modules （ESM）** 是現代 JavaScript 標準，使用 `import` 和 `export` 語法。這種方式廣泛支援於現代瀏覽器和新版本的 Node.js 中。
+
+- 如果在 `package.json` 裡加上 `"type": "module"`，則所有 `.js` 檔案會被視為 `ESM`。否則，`Node.js` 會將它們當作 `CommonJS` 處理。
+
+- 使用 `.mjs` 後綴也可以強制使用 `ESM`，`.cjs` 後綴則用於 `CommonJS`。
+
+
+## 使用方法：
+
+### **CommonJS （CJS）** 匯入模組：
+```javascript
+const moduleName = require('./moduleName');
+```
+範例：
+```javascript
+const { add } = require('./utils');
+
+console.log(add(2, 3)); 
+```
+
+- - -
+
+### **CommonJS （CJS）** 匯出模組：
+```javascript
+module.exports = {
+  functionName,
+  variableName
+};
+```
+範例：
+```javascript
+function add(a, b) {
+  return a + b;
+}
+
+module.exports = { add };
+```
+
+- - -
+
+### **ECMAScript Modules （ESM）** 匯入模組：
+```javascript
+import moduleName from './moduleName.js';
+// 或
+import { functionName, variableName } from './moduleName.js';
+```
+範例：
+```javascript
+export function add(a, b) {
+  return a + b;
+}
+```
+
+- - -
+
+### **ECMAScript Modules （ESM）** 匯出模組：
+```javascript
+export const functionName = () => { ... };
+// 或
+export default functionName;
+```
+範例：
+
+
+```javascript
+import { add } from './utils.js';
+
+console.log(add(2, 3));  // 5
+```
