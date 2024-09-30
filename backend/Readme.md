@@ -157,6 +157,7 @@ app.listen(port, () => {
 
 - 不該上傳的檔案：
   - `node_modules 資料夾`：雖然包含了所有的 npm 模組，但不應該上傳到 GitHub。因為其他開發者可以自己透過 npm install 根據 package.json 安裝依賴模組。
+  -  `.env 檔案`：通常包含環境變數，如：API keys 或資料庫密碼。
   
 - 不確定：
   - ` package-lock.json`：在想要鎖定確切的依賴版本的時候，上傳這個檔案，能確保其他人安裝相同版本的依賴。
@@ -168,7 +169,7 @@ Ans：在專案的跟目錄下建立 `.gitignore`檔案，內容如下：
 # 忽略 node_modules 資料夾
 node_modules/
 
-# 忽略 .env 檔案（通常包含環境變數，如 API keys 或資料庫密碼）
+# 忽略 .env 檔案
 .env
 ```
 ## 7. CJS vs ESM，這兩者分別怎麼用？
