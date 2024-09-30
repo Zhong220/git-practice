@@ -1,0 +1,5 @@
+# 忽略 node_modules 資料夾
+node_modules/
+
+# 忽略 .env 檔案（通常包含環境變數，如 API keys 或資料庫密碼）
+.env
