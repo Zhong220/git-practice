@@ -9,6 +9,11 @@
 - [x] 5. Port number 要怎麼以環境變數來設定
 - [x] 6. 哪些檔案應該要被放上 github repo 
 - [x] 7. CJS vs ESM，這兩者分別怎麼用
+
+進階：
+- [x] 8. localhost 是什麼？
+- [x] 9. curl 是什麼？查查看怎麼用 curl 來測試網路連線？常用參數有哪些？
+
 ## 1. 觀察 package.json 的變化
 在 /backend 中執行 `npm init` 後，產生 package.json，其內容如下：
 
@@ -197,7 +202,7 @@ const { add } = require('./utils');
 console.log(add(2, 3)); 
 ```
 
-- - -
+---
 
 ### **CommonJS （CJS）** 匯出模組：
 ```javascript
@@ -215,7 +220,7 @@ function add(a, b) {
 module.exports = { add };
 ```
 
-- - -
+---
 
 ### **ECMAScript Modules （ESM）** 匯入模組：
 ```javascript
@@ -230,7 +235,7 @@ export function add(a, b) {
 }
 ```
 
-- - -
+---
 
 ### **ECMAScript Modules （ESM）** 匯出模組：
 ```javascript
@@ -245,4 +250,45 @@ export default functionName;
 import { add } from './utils.js';
 
 console.log(add(2, 3));  // 5
+```
+## 8. localhost 是什麼？
+Ans：**Localhost** 是指一台電腦向自己發出網路請求時所使用的名稱。
+
+在電腦網路中，**Localhost** 就是指自己目前所使用的電腦，而這台電腦會充當客戶端和伺服器，同時發出並接收請求，這種行為稱為「loopback 回環」。
+
+通常，**Localhost** 的 IP 位址是 `127.0.0.1`。這個 IP 是專門保留給 **Localhost** 的地址，用來讓自己的電腦進行內部網路測試，而不需要通過外部網路。
+
+## 9. curl 是什麼？curl 怎麼用來測試網路連線？常用參數有哪些？
+
+`curl` 是一款常用於網路資料傳輸的命令列工具，支援超過 25 種網路協定，包括 HTTP、HTTPS、FTP 等。它可以用於測試網站、模擬 API 請求、下載或上傳檔案等功能。curl 在 Linux、Windows 和 macOS 等操作系統上都支援，是開發者和網管常用的工具。
+
+**常用參數及說明：**
+
+| 參數                  | 說明                                                     | 範例                                                    |
+|-----------------------|----------------------------------------------------------|---------------------------------------------------------|
+| `-A` 或 `--user-agent`| 設定使用者代理 (User-Agent)                               | `curl -A "Mozilla/5.0" https://example.com`              |
+| `-d` 或 `--data`      | 使用 POST 方法，傳送資料到伺服器                           | `curl -d "name=John" https://example.com/post`           |
+| `-H` 或 `--header`    | 指定 HTTP 請求的 header，適用於 GET 和 POST                | `curl -H "Content-Type: application/json" https://example.com` |
+| `-I` 或 `--head`      | 只取得 HTTP 請求的回應 Header                             | `curl -I https://www.google.com`                        |
+| `-k` 或 `--insecure`  | 跳過 SSL 憑證驗證，允許不安全的連線                        | `curl -k https://example.com`                           |
+| `-L` 或 `--location`  | 自動追蹤伺服器的重定向 (如 3XX 狀態碼)                    | `curl -L https://example.com`                           |
+| `-o` 或 `--output`    | 將輸出寫入指定檔案而不是輸出到終端                         | `curl -o output.txt https://example.com`                |
+| `-u` 或 `--user`      | 使用帳號和密碼進行伺服器驗證 (Basic Authentication)        | `curl -u username:password https://example.com`         |
+| `-v` 或 `--verbose`   | 顯示詳細的請求和回應過程，方便調試                         | `curl -v https://example.com`                           |
+| `-X` 或 `--request`   | 指定 HTTP 請求方法 (GET, POST, PUT, DELETE)                | `curl -X POST https://example.com/post`                 |
+| `--stderr`            | 將錯誤訊息重定向到指定檔案或標準輸出                       | `curl --stderr error_log.txt https://example.com`       |
+| `--cacert`            | 使用自定憑證來檢查伺服器憑證的有效性                       | `curl --cacert ca.pem https://example.com`              |
+
+**常見 curl 測試網路連線範例：**
+
+```bash
+// 檢查網站是否可訪問 (GET 請求)：
+curl https://www.google.com
+檢查網站的 HTTP 回應 Header：
+curl -I https://www.google.com
+curl -X POST -d "name=John&age=30" https://example.com/api
+curl -k https://self-signed.example.com
+curl -L https://example.com
+curl -A "Mozilla/5.0" https://example.com
+
 ```
