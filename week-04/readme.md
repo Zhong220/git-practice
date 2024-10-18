@@ -15,7 +15,7 @@
 - [ ] 12. (optional) 如果你很初學，不放心自己的過程是否正確，可以紀錄過程，我會盡量幫忙看
 - - -
 ### 1. 提供 instance 的 public IP：
-`http://3.25.197.50/`
+http://3.25.197.50/
 
 ### 2. 什麼是 instance type？
 Instance type 由不同的 **CPU, Memory, Storage,** 和 **networking capacity** 組合而成，故 Instance type 指的是不同的虛擬伺服器配置選項，在經過設計後分別適用於不同的情境，讓使用者可以根據需求來選擇合適的資源配置。
